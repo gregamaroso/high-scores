@@ -52,16 +52,9 @@ rl.on("close", () => {
       a = pi(a);
       b = pi(b);
 
-      if (a < b) {
-        return -1;
-      }
-      if (a > b) {
-        return 1;
-      }
-
-      return 0;
+      // Sorts highest to lowest
+      return a > b ? -1 : a < b ? 1 : 0;
     })
-    .reverse()
     .reduce((r, k) => {
       const sk = pi(k);
       r[sk] = scores.get(sk);
