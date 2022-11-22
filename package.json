@@ -1,0 +1,26 @@
+{
+  "name": "high-scores",
+  "version": "1.0.0",
+  "description": "",
+  "main": "process.js",
+  "type": "module",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "process": "node ./process.js data/input-data.data"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregamaroso/high-scores.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregamaroso/high-scores/issues"
+  },
+  "homepage": "https://github.com/gregamaroso/high-scores#readme"
+}
