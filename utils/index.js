@@ -21,11 +21,9 @@ export const processLineItem = (str) => {
         return (i === 0) ? parseInt(item): item;
     });
 
-    const itemStatus = (!isNumber(score) || !isJson(record)) ? status.Error : status.Ok;
-
     return {
         score,
         record,
-        status: itemStatus
+        status: (!isNumber(score) || !isJson(record)) ? status.Error : status.Ok
     }
 };

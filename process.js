@@ -48,12 +48,28 @@ rl.on('line', (line) => {
 });
 
 rl.on('close', () => {
-    const allScores = Object.keys(Object.fromEntries(scores)).sort().reverse().reduce((r, k) => {
-        const sk = parseInt(k);
+    const pi = (i) => parseInt(i);
+
+    const allScores = Object.keys(Object.fromEntries(scores)).sort((a, b) => {
+        a = pi(a);
+        b = pi(b);
+
+        if (a < b) {
+            return -1;            
+        }
+        if (a > b) {
+            return 1;
+        }
+
+        return 0;
+    }).reverse().reduce((r, k) => {
+        const sk = pi(k);
         r[sk] = scores.get(sk);
 
         return r;
     }, {});
 
     console.log(`Processed ${counter} entries. ${skippedRecords.size} skipped entries.`);
+
+    console.log(allScores);
 });
