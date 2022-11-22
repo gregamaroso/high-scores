@@ -11,7 +11,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "process": "node ./process.js data/input-data.data"
+    "process": "node ./process.js data/short.data"
   },
   "repository": {
     "type": "git",

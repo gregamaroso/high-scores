@@ -1,20 +1,39 @@
 import fs from 'fs';
 import readline from 'readline';
 
-function read() {
-    let counter = 0;
+import { processLineItem, status as statuses } from './utils/index.js';
 
-    const readStream = fs.createReadStream('data/input-data.data');
-    let rl = readline.createInterface({ input: readStream });
 
-    rl.on('line', (line) => {
-        // const b = line.split(':');
-        counter++;
-    });
+// TODO
+// install yargs
+// pass the data file as an argument
+// pass the top NN results as an argument
 
-    rl.on('close', () => {
-        console.log(`something happened ${counter} times`);
-    });
-}
+const file = 'data/short.data';
+const numResults = 5;
 
-read();
+
+let counter = 0;
+const scores = new Map();
+const skippedRecords = new Map();
+
+const readStream = fs.createReadStream(file);
+let rl = readline.createInterface({ input: readStream });
+
+rl.on('line', (line) => {
+    const { score, record, status } = processLineItem(line);
+
+    if (status !== statuses.Ok) {
+        skippedRecords.set(score, record);
+
+        return;
+    }
+
+
+
+    counter++;
+});
+
+rl.on('close', () => {
+    console.log(`Processed ${counter} entries. ${skippedRecords.size} skipped entries.`);
+});
