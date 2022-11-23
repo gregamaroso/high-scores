@@ -22,3 +22,48 @@ npm run process
 // Run the processor with non-default options
 npm run process -- -c <num> -f <file>
 ```
+
+# Sample Input
+
+```
+// Invalid data (missing id)
+input-invalid.data
+
+// Small data set for testing purposes only (default option) 
+input-short.data
+
+// Large dataset for validation purposes (70,108 entries)
+input-long.data
+```
+
+
+# Sample Output
+
+```
+Processing file data/input-long.data
+
+Processed 70,108 entries in 0.329 seconds. 0 skipped entries.
+
+[
+  {
+    score: 9007182007762944,
+    id: 'd1efcfc6-9298-5856-bece-ed4242c36b5d'
+  },
+  {
+    score: 9007125380464640,
+    id: '88e23d99-64d7-5939-8a21-e68a637a0566'
+  },
+  {
+    score: 9006994092457984,
+    id: '45ad2cf6-9673-523f-a20e-3c31df0e488a'
+  },
+  {
+    score: 9006945295925248,
+    id: 'fa67620b-7795-5130-a668-b8c9335bcc8b'
+  },
+  {
+    score: 9006833997971456,
+    id: 'f87e92f6-9dce-5c21-86a2-34c9aedd028e'
+  }
+]
+```

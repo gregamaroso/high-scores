@@ -1,6 +1,8 @@
-const isJson = (str: any): boolean => {
+const isJson = (str: any): boolean | object => {
   try {
-    return JSON.parse(str) && !!str;
+    const p = JSON.parse(str);
+
+    return p && !!str ? p : false;
   } catch (e) {
     return false;
   }
@@ -13,17 +15,26 @@ enum recordStatus {
   Error = "Error",
 }
 
+interface IRecord {
+  id?: string;
+  data?: string;
+}
+
 interface ILineItem {
   score: number;
-  record: string;
+  record: IRecord;
   status: keyof typeof recordStatus;
 }
 
 const processLineItem = (str: string): ILineItem => {
-  const [tScore, record] = str.split(/\:(.*)/).map((item) => item.trim());
+  const [tScore, tRecord] = str.split(/\:(.*)/).map((item) => item.trim());
+
   const score = +tScore;
+  const record = (isJson(tRecord) || {}) as IRecord;
   const status =
-    !isNumber(score) || !isJson(record) ? recordStatus.Error : recordStatus.Ok;
+    !isNumber(score) || !record || !("id" in record)
+      ? recordStatus.Error
+      : recordStatus.Ok;
 
   return {
     score,

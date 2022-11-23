@@ -29,7 +29,7 @@ const numResults: number = argv.n;
 if (fs.existsSync(file)) {
   utils.log(`Processing file ${file}`);
 } else {
-  utils.log(`File '${file}' doesn't exist`);
+  utils.log(`File '${file}' doesn't exist. Exiting.`);
 
   process.exit(1);
 }
@@ -40,8 +40,8 @@ if (fs.existsSync(file)) {
 let counter: number = 0;
 let timing = { start: utils.now(), finish: 0 };
 
-const scores = new Map<number, string>();
-const skippedRecords = new Map<number, string>();
+const scores = new Map<number, object>();
+const skippedRecords = new Map<number, object>();
 
 const readStream = fs.createReadStream(file);
 let rl = readline.createInterface({ input: readStream });
@@ -75,22 +75,36 @@ rl.on("close", () => {
   timing.finish = utils.now();
 
   const elapsed = (timing.finish - timing.start) / 1000;
+  const numSkipped = skippedRecords.size;
+
+  if (numSkipped) {
+    utils.log(`Invalid entries detected. Exiting.`);
+
+    process.exit(2);
+  }
 
   const allScores = Object.keys(Object.fromEntries(scores))
     .map((i) => pi(i))
     .sort((a: number, b: number) => (a > b ? -1 : a < b ? 1 : 0))
     .reduce((r, k) => {
-      const sk = pi(k);
-      r[sk] = JSON.parse(scores.get(sk));
+      const score = pi(k);
+      const record = scores.get(score);
+
+      r.push({
+        score,
+        id: record["id"],
+      });
 
       return r;
-    }, {});
+    }, []);
 
   utils.log(
     `Processed ${counter.toLocaleString(
       "en-US"
-    )} entries in ${elapsed} seconds. ${skippedRecords.size} skipped entries.`
+    )} entries in ${elapsed} seconds.`
   );
 
   console.log(allScores);
+
+  process.exit(0);
 });
