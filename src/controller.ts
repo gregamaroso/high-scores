@@ -10,7 +10,7 @@ const utils = require("./lib/utils");
 var argv = require("yargs/yargs")(process.argv.slice(2)).options({
   n: {
     type: "number",
-    default: 2,
+    default: 5,
     describe: "The number of results to display",
   },
   f: {
