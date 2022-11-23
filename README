@@ -1,9 +1,24 @@
+# Challenge
+
+The goal of this repo is to process a large dataset (file based processing), finding the top-5 scores
+from the results and the associated data.
+
 # Commands
 
 ```
+// To format the code. Typically this would be a pre-commit hook,
+// but in this case I kept it as a separate command.
 npx prettier --write .
 
+
+// Learn more about the available options
+npm run process help
+
+
+// Run the processor with default options
 npm run process
 
+
+// Run the processor with non-default options
 npm run process -- -c <num> -f <file>
 ```
