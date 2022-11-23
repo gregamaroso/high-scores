@@ -2,17 +2,25 @@
   "name": "high-scores",
   "version": "1.0.0",
   "description": "",
-  "main": "process.js",
-  "type": "module",
-  "dependencies": {
-    "fs": "^0.0.1-security",
-    "readline": "^1.3.0"
+  "type": "commonjs",
+  "engines": {
+    "node": ">=17.0.0"
   },
-  "devDependencies": {},
+  "dependencies": {
+    "build": "tsc",
+    "fs": "^0.0.1-security",
+    "readline": "^1.3.0",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/yargs": "^17.0.13",
+    "typescript": "^4.9.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write .",
-    "process": "node ./process.js data/short.data"
+    "preprocess": "tsc && chmod 755 ./build/controller.js",
+    "process": "node ./build/controller.js"
   },
   "repository": {
     "type": "git",
