@@ -15,7 +15,7 @@ var argv = require("yargs/yargs")(process.argv.slice(2)).options({
   },
   f: {
     type: "string",
-    default: "data/short.data",
+    default: "data/input-short.data",
     describe: "Path to input file",
   },
 }).argv;
