@@ -1,2 +1,9 @@
+# Commands
 
+```
+npx prettier --write .
 
+npm run process
+
+npm run process -- -c <num> -f <file>
+```
